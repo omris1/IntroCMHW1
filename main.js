@@ -79,6 +79,7 @@
       console.log('Successful login for: ' + response.name);
       document.getElementById('status').innerHTML =
         'Thanks for logging in, ' + response.name + '!';
+      getLikesMusic();
     });
   }
 
@@ -86,5 +87,12 @@
 // function(response) {
       // Insert your code here
 //console.log(response);
-  
+
+
+function getLikesMusic(){
+  FB.api('/me/music', function(response){
+    for(var k=0; k<response.data.length; k++){
+      music.push(response.data[k]);
+    }
+  console.log(response)});}
 
