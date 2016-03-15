@@ -80,6 +80,7 @@
       document.getElementById('status').innerHTML =
         'Thanks for logging in, ' + response.name + '!';
       //getLikesMusic();
+      getLike();
     });
   }
 
