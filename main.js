@@ -83,7 +83,7 @@ function testAPI() {
   });
   foundMusic = getLike();
   //getLike();
-  getMusic(foundMusic);
+  
 }
 
 //  FB.api('/me','GET',{"fields":"id,name,context"},
@@ -101,7 +101,7 @@ function getLike(){
       document.getElementById('music').innerHTML += (response.data[k].name + '; ');
       }
   })
-  return allLiked;
+  getMusic(foundMusic);
 }
 
 function getMusic(musicList){
