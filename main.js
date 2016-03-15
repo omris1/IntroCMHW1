@@ -8,7 +8,7 @@ function statusChangeCallback(response) {
   // for FB.getLoginStatus().
   if (response.status === 'connected') {
     // Logged into your app and Facebook.
-    window.location.reload();
+    //window.location.reload();
     testAPI();
     //like();
   //  music();
