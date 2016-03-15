@@ -83,7 +83,8 @@ function testAPI() {
   });
   foundMusic = getLike();
   //getLike();
-  getMusic(foundMusic);
+  //getMusic(foundMusic);
+  getMusic("test");
 }
 
 //  FB.api('/me','GET',{"fields":"id,name,context"},
