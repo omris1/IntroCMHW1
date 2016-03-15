@@ -79,10 +79,9 @@
       console.log('Successful login for: ' + response.name);
       document.getElementById('status').innerHTML =
         'Thanks for logging in, ' + response.name + '!';
-      //getLikesMusic();
-      console.log('test1')
-      getLike();
     });
+    console.log("1")
+    getLike();
   }
 
 //  FB.api('/me','GET',{"fields":"id,name,context"},
