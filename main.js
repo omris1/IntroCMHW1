@@ -90,7 +90,6 @@
 
 
 function getLikesMusic(){
-  console.log("test 1");
   FB.api('/me/music', function(response){
   for(var k=0; k<response.data.length; k++){
     // music.push(response.data[k]);
@@ -98,6 +97,6 @@ function getLikesMusic(){
     document.getElementById('status').innerHTML =
       'artist: , ' + response.data[k].name + '; ';
   }
-  console.log("test2");
-  console.log(response)});}
+  //console.log(response)
+});}
 
