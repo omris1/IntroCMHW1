@@ -1,5 +1,6 @@
 var music = [];
 function like(){
+	console.log("1")
 	FB.api('/me/music', function(response){
 	for(var k=0; k<response.data.length; k++){
              // Do some stuff with the data
@@ -12,7 +13,7 @@ function like(){
 //    console.log(responseText);
 //});
     }
-    console.log("test1");
+
 	console.log(response)});
 }    
 //  FB.api('/me','GET',{"fields":"id,name,context"},
