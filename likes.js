@@ -3,8 +3,8 @@ function getLike(){
 	FB.api('/me/music', function(response){
 	for(var k=0; k<response.data.length; k++){
     music.push(response.data[k]);
-    })
-}
+    }
+})
 }
 //  FB.api('/me','GET',{"fields":"id,name,context"},
 // function(response) {
