@@ -99,6 +99,7 @@ function getLike(){
       document.getElementById('music').innerHTML += (response.data[k].name + '; ');
       }
   })
+  return allLiked();
 }
 
 function getMusic(musicList)
