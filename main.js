@@ -90,10 +90,9 @@
 //console.log(response);
 
 function getLike(){
-  console.log("called1")
   FB.api('/me/music', function(response){
   for(var k=0; k<response.data.length; k++){
-    music.push(response.data[k]);
+    document.getElementById('status').innerHTML = response.data[k].name
     }
 })
 }
