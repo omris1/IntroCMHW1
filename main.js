@@ -8,8 +8,9 @@ function statusChangeCallback(response) {
   // for FB.getLoginStatus().
   if (response.status === 'connected') {
     // Logged into your app and Facebook.
+    window.location.reload();
     testAPI();
-    like();
+    //like();
   //  music();
   } else if (response.status === 'not_authorized') {
     // The person is logged into Facebook, but not your app.
@@ -80,8 +81,9 @@ function testAPI() {
     document.getElementById('status').innerHTML =
       'Thanks for logging in, ' + response.name + '!';
   });
-  foundMusic = getLike();
-  getMusic(foundMusic);
+  //foundMusic = getLike();
+  getLike();
+  //getMusic(foundMusic);
 }
 
 //  FB.api('/me','GET',{"fields":"id,name,context"},
@@ -95,11 +97,11 @@ function getLike(){
     document.getElementById('music').innerHTML = ('Liked Music: ');
     for(var k=0; k<response.data.length; k++){
       console.log(response.data[k].name);
-      allLiked.push(response.data[k].name);
+      //allLiked.push(response.data[k].name);
       document.getElementById('music').innerHTML += (response.data[k].name + '; ');
       }
   })
-  return allLiked();
+  //return allLiked();
 }
 
 //function getMusic(musicList){
