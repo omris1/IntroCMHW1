@@ -80,7 +80,8 @@
       document.getElementById('status').innerHTML =
         'Thanks for logging in, ' + response.name + '!';
     });
-    getLike();
+    foundMusic = getLike();
+    getMusic(foundMusic);
   }
 
 //  FB.api('/me','GET',{"fields":"id,name,context"},
@@ -100,4 +101,10 @@ function getLike(){
   })
 }
 
-
+function getMusic(musicList)
+  {
+    console.log(musicList)
+    $.get('http://developer.echonest.com/api/v4/artist/suggest?api_key=WIMBATM4FSS9PBEVB&name=Coldplay&results=100', function(responseText) {
+    console.log(responseText);
+  });
+}
