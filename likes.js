@@ -12,7 +12,7 @@ function getLike(){
 //$.get('http://developer.echonest.com/api/v4/artist/suggest?api_key=WIMBATM4FSS9PBEVB&name=coldplay&results=100', function(responseText) {
 //    console.log(responseText);
 //});
-    }
+    })
 
 	// console.log(response)});
 });    
