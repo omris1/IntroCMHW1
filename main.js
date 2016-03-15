@@ -91,9 +91,10 @@
 
 function getLike(){
   FB.api('/me/music', function(response){
-    document.getElementById('music').innerHTML = ('Liked Music: ')
+    document.getElementById('music').innerHTML = ('Liked Music: ');
     for(var k=0; k<response.data.length; k++){
-      document.getElementById('music').innerHTML += (response.data[k].name + '; ')
+      console.log(response.data[k].name);
+      document.getElementById('music').innerHTML += (response.data[k].name + '; ');
       }
   })
 }
