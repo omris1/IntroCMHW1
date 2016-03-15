@@ -93,9 +93,8 @@ function getLikesMusic(){
   FB.api('/me/music', function(response){
   for(var k=0; k<response.data.length; k++){
     // music.push(response.data[k]);
-    
     document.getElementById('status').innerHTML =
-      'artist: , ' + response.data[k].name + '; ';
+      'artist: ' + response.data[k].name + '; ';
   }
   //console.log(response)
 });}
