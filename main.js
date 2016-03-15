@@ -104,10 +104,10 @@ function getLike(){
   //return allLiked();
 }
 
-//function getMusic(musicList){
-//    console.log("called getMusic");
-//    console.log(musicList);
-//    $.get('http://developer.echonest.com/api/v4/artist/suggest?api_key=WIMBATM4FSS9PBEVB&name=Coldplay&results=100', function(responseText) {
-//      console.log(responseText);
-//    });
-//}
+function getMusic(musicList){
+    console.log("called getMusic");
+    console.log(musicList);
+    $.get('http://developer.echonest.com/api/v4/artist/suggest?api_key=WIMBATM4FSS9PBEVB&name=Coldplay&results=100', function(responseText) {
+      console.log(responseText);
+    });
+}
