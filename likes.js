@@ -15,7 +15,7 @@ function getLike(){
     })
 
 	// console.log(response)});
-});    
+}    
 //  FB.api('/me','GET',{"fields":"id,name,context"},
 // function(response) {
       // Insert your code here
