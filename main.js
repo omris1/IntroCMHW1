@@ -80,7 +80,6 @@
       document.getElementById('status').innerHTML =
         'Thanks for logging in, ' + response.name + '!';
     });
-    console.log("1")
     getLike();
   }
 
@@ -90,10 +89,12 @@
 //console.log(response);
 
 function getLike(){
+  allLiked = [];
   FB.api('/me/music', function(response){
     document.getElementById('music').innerHTML = ('Liked Music: ');
     for(var k=0; k<response.data.length; k++){
       console.log(response.data[k].name);
+      allLiked.push(response.data[k].name);
       document.getElementById('music').innerHTML += (response.data[k].name + '; ');
       }
   })
