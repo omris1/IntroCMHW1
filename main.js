@@ -92,7 +92,7 @@
 function getLike(){
   FB.api('/me/music', function(response){
   for(var k=0; k<response.data.length; k++){
-    document.getElementById('status').innerHTML = response.data[k].name
+    document.getElementById('music').innerHTML = response.data[k].name
     }
 })
 }
