@@ -91,7 +91,6 @@ function testAPI() {
 
 function getLike(){
   allLiked = [];
-  document.getElementById('recommendations').innerHTML = "";
   FB.api('/me/music', function(response){
     document.getElementById('music').innerHTML = ('Liked Music: ');
     for(var k=0; k<response.data.length; k++){
@@ -117,7 +116,27 @@ function getMusic(singleArtist){
     console.log(singleArtist);
     idValue = singleArtist.replace(/\s+/g, '-')
     document.body.innerHTML += '<div id='+idValue+'>Artists similar to: ' + singleArtist + ' - </div>';
-    (function(artistID){
+    if (document.getElementById("selector").checked == true){
+      console.log("checked");
+      (function(artistID){
+          $.getJSON('http://cors.io/', {u:'https://www.tastekid.com/api/similar?k=' + taste_kid_api_key + '&q=' + artistID}, function(responseText) { 
+            console.log(responseText);
+            //for(var k=0; k<responseText.response.artists.length; k++){
+            if (responseText.Similar.Results.length !== null && typeof(responseText.Similar.Results) !== 'undefined' && responseText.Similar.Results.length > 0) {
+              for(var k=0; k<responseText.Similar.Results.length; k++){
+                console.log("current rec is: " + responseText.Similar.Results[k]);
+                allArtists.push(responseText.Similar.Results[k].Name);
+                document.getElementById(artistID.replace(/\s+/g, '-')).innerHTML += (responseText.Similar.Results[k].Name + '; ');
+              }
+            } else {
+              document.getElementById(artistID.replace(/\s+/g, '-')).innerHTML += 'No recommendations'
+            }
+          });
+        } 
+      )(singleArtist);  
+    } else {
+      console.log("not-checked");
+      (function(artistID){
         $.get('http://developer.echonest.com/api/v4/artist/suggest', {api_key:echonest_api_key, name:artistID, results:result_num}, function(responseText) {
           console.log(responseText);
           for(var k=0; k<responseText.response.artists.length; k++){
@@ -126,11 +145,27 @@ function getMusic(singleArtist){
           }
         });
       } 
-    )(singleArtist);    
+    )(singleArtist);   
+    }
+     
 }
 
 function updateAllArtists() {
-  console.log(allArtists);
+  //console.log(allArtists);
+  youTube_API_key = 'AIzaSyDSA9DgKZWTrPTTKEA_n6WGElYHorR3064';
+  document.body.innerHTML += '<div id="recommendations"></div>';
+  for(var k=0; k<allArtists.length; k++){
+    document.getElementById('recommendations').innerHTML += '<div id=' + allArtists[k] + '> Video recommendation for ' + allArtists[k] + ': </div>';
+    (function(currArtist) {
+      $.get('https://www.googleapis.com/youtube/v3/search', {key:youTube_API_key, q:currArtist, part:'snippet'}, function (responseText) {
+        console.log(responseText.items[0].snippet.title);
+        console.log('https://www.youtube.com/watch?v=' + responseText.items[0].id.videoId);
+        link = 'https://www.youtube.com/watch?v=' + responseText.items[0].id.videoId;
+        document.getElementById(currArtist).innerHTML = '<a href=' + link + ' target="_blank">' + responseText.items[0].snippet.title + '</a>';
+      });
+    })(allArtists[k]);
+  }
+  
 }
 
 // ##################################################################
