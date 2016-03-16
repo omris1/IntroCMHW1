@@ -82,8 +82,6 @@ function testAPI() {
       'Thanks for logging in, ' + response.name + '!';
   });
   foundMusic = getLike();
-  //getLike();
-  
 }
 
 //  FB.api('/me','GET',{"fields":"id,name,context"},
@@ -93,21 +91,64 @@ function testAPI() {
 
 function getLike(){
   allLiked = [];
+  document.getElementById('recommendations').innerHTML = "";
   FB.api('/me/music', function(response){
     document.getElementById('music').innerHTML = ('Liked Music: ');
     for(var k=0; k<response.data.length; k++){
-      console.log(response.data[k].name);
       allLiked.push(response.data[k].name);
+      console.log(allLiked);
       document.getElementById('music').innerHTML += (response.data[k].name + '; ');
+      getMusic(response.data[k].name);
+      //taste_kid_api_key = '209587-os981-ZKE17IOX';
+      //$.get('https://www.tastekid.com/api/similar' , {k:taste_kid_api_key, q:'Pink Floyd'}, function(responseText) { });
+      //
+      //$.get('http://cors.io/', {u:'https://www.tastekid.com/api/similar?k=209587-os981-ZKE17IOX&q=Pink+Floyd'} , function(responseText) {console.log(responseText); });
       }
   })
-  getMusic(foundMusic);
+  setTimeout(function() { updateAllArtists() }, 5000);
 }
 
-function getMusic(musicList){
+allArtists = [];
+function getMusic(singleArtist){
+    echonest_api_key = 'WIMBATM4FSS9PBEVB';
+    taste_kid_api_key = '209587-os981-ZKE17IOX';
+    result_num = 10;
     console.log("called getMusic");
-    console.log(musicList);
-    // $.get('http://developer.echonest.com/api/v4/artist/suggest?api_key=WIMBATM4FSS9PBEVB&name=Coldplay&results=100', function(responseText) {
-    //   console.log(responseText);
-    // });
+    console.log(singleArtist);
+    idValue = singleArtist.replace(/\s+/g, '-')
+    document.body.innerHTML += '<div id='+idValue+'>Artists similar to: ' + singleArtist + ' - </div>';
+    //$.get('http://developer.echonest.com/api/v4/artist/suggest?api_key=WIMBATM4FSS9PBEVB&name='+singleArtist+'&results=10', function(responseText) {
+    (function(artistID){
+        $.get('http://developer.echonest.com/api/v4/artist/suggest', {api_key:echonest_api_key, name:artistID, results:result_num}, function(responseText) {
+        //$.get('https://www.tastekid.com/api/similar' , {k:taste_kid_api_key, q:artistID}, function(responseText) { 
+          console.log(responseText);
+          for(var k=0; k<responseText.response.artists.length; k++){
+            allArtists.push(responseText.response.artists[k].name);
+            document.getElementById(artistID.replace(/\s+/g, '-')).innerHTML += (responseText.response.artists[k].name + '; ');
+          }
+        });
+      } 
+    )(idValue);    
 }
+
+function updateAllArtists() {
+  console.log(allArtists);
+}
+
+// ##################################################################
+// Deprecated code that fails due to async issues
+// function getMusic(singleArtist){
+//     echonest_api_key = 'WIMBATM4FSS9PBEVB';
+//     result_num = 10;
+//     console.log("called getMusic");
+//     console.log(singleArtist);
+//     idValue = singleArtist.replace(/\s+/g, '-')
+//     document.body.innerHTML += '<div id='+idValue+'>Artists similar to: ' + singleArtist + ' - </div>';
+    //$.get('http://developer.echonest.com/api/v4/artist/suggest?api_key=WIMBATM4FSS9PBEVB&name='+singleArtist+'&results=10', function(responseText) {
+//     $.get('http://developer.echonest.com/api/v4/artist/suggest', {api_key:echonest_api_key, name:singleArtist, results:result_num}, function(responseText) {
+//       console.log(responseText);
+//       for(var k=0; k<responseText.response.artists.length; k++){
+//         document.getElementById(idValue).innerHTML += (responseText.response.artists[k].name + '; ');
+//       }
+//     });
+// }
