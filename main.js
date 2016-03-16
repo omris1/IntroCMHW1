@@ -153,15 +153,15 @@ function getMusic(singleArtist){
 function updateAllArtists() {
   //console.log(allArtists);
   youTube_API_key = 'AIzaSyDSA9DgKZWTrPTTKEA_n6WGElYHorR3064';
-  document.body.innerHTML += '<div id="recommendations"></div>';
+  document.body.innerHTML += '<br><br><div id="recommendations"></div>';
   for(var k=0; k<allArtists.length; k++){
-    document.getElementById('recommendations').innerHTML += '<div id=' + allArtists[k] + '> Video recommendation for ' + allArtists[k] + ': </div>';
+    document.getElementById('recommendations').innerHTML += '<div id=rec_' + allArtists[k].replace(/\s+/g, '-') + '> Video recommendation for ' + allArtists[k] + ': </div>';
     (function(currArtist) {
       $.get('https://www.googleapis.com/youtube/v3/search', {key:youTube_API_key, q:currArtist, part:'snippet'}, function (responseText) {
-        console.log(responseText.items[0].snippet.title);
-        console.log('https://www.youtube.com/watch?v=' + responseText.items[0].id.videoId);
+        // console.log(responseText.items[0].snippet.title);
+        // console.log('https://www.youtube.com/watch?v=' + responseText.items[0].id.videoId);
         link = 'https://www.youtube.com/watch?v=' + responseText.items[0].id.videoId;
-        document.getElementById(currArtist).innerHTML = '<a href=' + link + ' target="_blank">' + responseText.items[0].snippet.title + '</a>';
+        document.getElementById('rec_'+currArtist.replace(/\s+/g, '-')).innerHTML += '<a href=' + link + ' target="_blank">' + responseText.items[0].snippet.title + '</a>';
       });
     })(allArtists[k]);
   }
