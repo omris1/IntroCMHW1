@@ -117,10 +117,8 @@ function getMusic(singleArtist){
     console.log(singleArtist);
     idValue = singleArtist.replace(/\s+/g, '-')
     document.body.innerHTML += '<div id='+idValue+'>Artists similar to: ' + singleArtist + ' - </div>';
-    //$.get('http://developer.echonest.com/api/v4/artist/suggest?api_key=WIMBATM4FSS9PBEVB&name='+singleArtist+'&results=10', function(responseText) {
     (function(artistID){
         $.get('http://developer.echonest.com/api/v4/artist/suggest', {api_key:echonest_api_key, name:artistID, results:result_num}, function(responseText) {
-        //$.get('https://www.tastekid.com/api/similar' , {k:taste_kid_api_key, q:artistID}, function(responseText) { 
           console.log(responseText);
           for(var k=0; k<responseText.response.artists.length; k++){
             allArtists.push(responseText.response.artists[k].name);
@@ -128,7 +126,7 @@ function getMusic(singleArtist){
           }
         });
       } 
-    )(idValue);    
+    )(singleArtist);    
 }
 
 function updateAllArtists() {
@@ -151,4 +149,34 @@ function updateAllArtists() {
 //         document.getElementById(idValue).innerHTML += (responseText.response.artists[k].name + '; ');
 //       }
 //     });
+// }
+
+
+// function getMusic(singleArtist){
+//     echonest_api_key = 'WIMBATM4FSS9PBEVB';
+//    taste_kid_api_key = '209587-os981-ZKE17IOX';
+//     result_num = 10;
+//     console.log("called getMusic");
+//     console.log(singleArtist);
+//     idValue = singleArtist.replace(/\s+/g, '-')
+//     document.body.innerHTML += '<div id='+idValue+'>Artists similar to: ' + singleArtist + ' - </div>';
+    //$.get('http://developer.echonest.com/api/v4/artist/suggest?api_key=WIMBATM4FSS9PBEVB&name='+singleArtist+'&results=10', function(responseText) {
+//     (function(artistID){
+        //$.get('http://developer.echonest.com/api/v4/artist/suggest', {api_key:echonest_api_key, name:artistID, results:result_num}, function(responseText) {
+        //$.get('https://www.tastekid.com/api/similar' , {k:taste_kid_api_key, q:artistID}, function(responseText) { 
+//         $.getJSON('http://cors.io/', {u:'https://www.tastekid.com/api/similar?k=' + taste_kid_api_key + '&q=' + artistID}, function(responseText) { 
+//           console.log(responseText);
+          //for(var k=0; k<responseText.response.artists.length; k++){
+//           if (responseText.Similar.Results.length !== null && typeof(responseText.Similar.Results) !== 'undefined') {
+//             for(var k=0; k<responseText.Similar.Results.length; k++){
+              //allArtists.push(responseText.response.artists[k].name);
+//               allArtists.push(responseText.Results[k].Name);
+//               document.getElementById(artistID.replace(/\s+/g, '-')).innerHTML += (responseText.Similar.Results[k].Name + '; ');
+//             }
+//           } else {
+//             document.getElementById(artistID.replace(/\s+/g, '-')).innerHTML += 'No recoemmendations'
+//           }
+//         });
+//       } 
+//     )(singleArtist);    
 // }
